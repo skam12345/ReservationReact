@@ -25,6 +25,7 @@ export const InputTag = styled.input<{
   border: ${props => (props.border ? props.border : '1px solid #A8A29E')};
   padding: 0px 8px;
   &::placeholder {
+    user-select: none;
     font-size: ${props => (props.fontSize ? props.fontSize : 18)}px;
     font-weight: ${props => (props.fontWeight ? props.fontWeight : 600)};
     color: ${props => (props.fontColor ? props.fontColor : '#A8A29E')};
@@ -46,4 +47,5 @@ export const InputEssentialDesign = styled.p<{
   font-size: ${props => (props.fontSize ? props.fontSize : 18)}px;
   font-weight: ${props => (props.fontWeight ? props.fontWeight : 600)};
   color: red;
+  user-select: none;
 `;

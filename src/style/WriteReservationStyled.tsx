@@ -99,6 +99,11 @@ export const WriteSelectDateBtnContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: #f5f5f4;
+    box-shadow: inset -3px 4px 3px 2px #d1d1d0;
+  }
 `;
 
 export const WriteSelectDatebtnText = styled.p`
@@ -106,6 +111,7 @@ export const WriteSelectDatebtnText = styled.p`
   font-size: 24px;
   font-weight: 600;
   color: black;
+  user-select: none;
 `;
 
 export const WriteSecondInputContainer = styled.div`
@@ -152,8 +158,11 @@ export const GuestControllerBtnContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
+    background-color: #f5f5f4;
+    box-shadow: inset -3px 4px 3px 2px #d1d1d0;
   }
 `;
 
@@ -174,6 +183,7 @@ export const WriteSelectTableSelectContainer = styled.select<{
   background-image: url(${DropDownArrow});
   background-repeat: no-repeat;
   background-position: calc(100% - 10px) center;
+  user-select: none;
 `;
 
 export const WriteSelectTableOption = styled.option<{
@@ -188,6 +198,8 @@ export const GuestValueText = styled.p`
   font-size: 28px;
   font-weight: 600;
   color: black;
+
+  user-select: none;
 `;
 
 export const WriteThirdInputContainer = styled.div`
@@ -207,11 +219,13 @@ export const WriteTextAreaComponent = styled.textarea`
   color: black;
 `;
 
-export const WriteCompleteBtnContainer = styled.div`
+export const WriteCompleteBtnContainer = styled.div<{
+  able: boolean;
+}>`
   width: 98%;
   height: 15%;
   border-radius: 8px;
-  background-color: #f1a68c;
+  background-color: ${props => (props.able ? '#e15e32' : '#f1a68c')};
   margin-bottom: 1.2%;
   display: flex;
   flex-direction: column;
@@ -219,9 +233,11 @@ export const WriteCompleteBtnContainer = styled.div`
   align-items: center;
 `;
 
-export const WriteCompleteBtnText = styled.p`
+export const WriteCompleteBtnText = styled.p<{
+  able: boolean;
+}>`
   font-size: 150%;
   font-weight: 600;
-  color: #ffffff9c;
+  color: ${props => (props.able ? 'white' : '#ffffff9c')};
   text-align: center;
 `;

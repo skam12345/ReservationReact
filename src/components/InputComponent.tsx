@@ -15,6 +15,7 @@ interface inputProps {
   fontWeight?: number;
   fontColor?: string;
   essential: boolean;
+  setData: Function;
 }
 const InputComponent = ({
   width,
@@ -26,6 +27,7 @@ const InputComponent = ({
   fontWeight,
   fontColor,
   essential,
+  setData,
 }: inputProps) => {
   const [viewUpperStroper, setViewUpperStroper] = useState(true);
   const isInputText = (event: { target: { value: string } }) => {
@@ -34,6 +36,7 @@ const InputComponent = ({
     } else {
       setViewUpperStroper(true);
     }
+    setData(event.target.value.toString());
   };
   return (
     <InputContainer width={width} height={height}>
