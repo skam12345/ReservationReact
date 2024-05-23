@@ -1,12 +1,15 @@
 import React from 'react';
 import Router from './route/BasicRoute';
+import { IdProvider } from './store/context/IdContext';
 import { MainContainer } from './style/AppStyled';
 
 function App() {
   return (
-    <MainContainer>
-      <Router />
-    </MainContainer>
+    <IdProvider>
+      <MainContainer>
+        <Router />
+      </MainContainer>
+    </IdProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Close from '../assets/icons/close.svg';
 import Event from '../assets/icons/event_available.svg';
@@ -55,21 +55,15 @@ const WriteReservation = () => {
     setGuest(guest + 1);
   };
 
-  const controllerMinus = () => {
-    if (guest === 0) {
-      setGuest(1);
-    } else {
-      setGuest(guest - 1);
+  const controllerMinus = useCallback(() => {
+    if (guest === 1) {
+      return setGuest(1);
     }
-  };
+    return setGuest(guest - 1);
+  }, [guest]);
 
   const controllerTable = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    if (table === 'Select Table') {
-      setTable('');
-      setTable(event.target.value);
-    } else {
-      setTable(event.target.value);
-    }
+    setTable(event.target.value);
   };
 
   const changeContent = (event: {

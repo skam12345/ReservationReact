@@ -7,6 +7,7 @@ import EventAvailable from '../assets/icons/event_available.svg';
 import Group from '../assets/icons/group.svg';
 import Phone from '../assets/icons/phone.svg';
 import Trash from '../assets/icons/trash.svg';
+import { useIdContext } from '../store/context/IdContext';
 import {
   ResBtnText,
   ResCreateBtn,
@@ -31,9 +32,45 @@ import {
 } from '../style/ReservationStyled';
 const Reservation = () => {
   const [data, setData] = useState<any[]>([]);
+  const idContext = useIdContext();
   const navigate = useNavigate();
   const goWrite = () => {
     navigate('/write');
+  };
+
+  const goEdit = (index: number) => {
+    navigate('/edit', { state: data[index] });
+  };
+
+  const deleteItem = (id: any) => {
+    let data = localStorage.getItem('data');
+    let dataList = [];
+    if (data != null) {
+      let dataParse = JSON.parse(data);
+      for (let i = 0; i < dataParse.length; i++) {
+        let object = JSON.parse(dataParse[i]);
+        if (object.id !== id) {
+          dataList.push(
+            JSON.stringify({
+              id: object.id,
+              name: object.name,
+              phone: object.phone,
+              table: object.table,
+              guest: object.guest,
+              dateTime: object.dateTime,
+              content: object.content,
+            }),
+          );
+        }
+      }
+      localStorage.setItem('data', JSON.stringify(dataList));
+      setData(dataList);
+    }
+  };
+
+  const moveEditContent = (id: any) => {
+    idContext.setId(id);
+    navigate('/edit');
   };
 
   useEffect(() => {
@@ -72,9 +109,9 @@ const Reservation = () => {
       </ReservationTitleContainer>
       <ReservationContentContainer>
         {data.map((item, index) => (
-          <ReservationContentBox>
+          <ReservationContentBox onClick={() => moveEditContent(index)}>
             <ReservationInfoRowContainer>
-              <ReservationInfoNameText>
+              <ReservationInfoNameText onClick={() => goEdit(index)}>
                 {JSON.parse(item).name}
               </ReservationInfoNameText>
               <ReservationPhoneBox>
@@ -160,7 +197,9 @@ const Reservation = () => {
               <img src={Edit} style={{ userSelect: 'none' }} />
             </ReservationInfoRowContainer>
             <ReservationBtnContainer>
-              <ReservationDeleteBtn>
+              <ReservationDeleteBtn
+                onClick={() => deleteItem(JSON.parse(item).id)}
+              >
                 <img src={Trash} style={{ userSelect: 'none' }} />
               </ReservationDeleteBtn>
               <ReservationSeatedBtn>

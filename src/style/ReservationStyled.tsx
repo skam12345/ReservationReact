@@ -100,6 +100,10 @@ export const ReservationInfoNameText = styled.p`
   font-weight: 800;
   color: black;
   margin-right: 20px;
+  &:hover {
+    cursor: pointer;
+    color: blue;
+  }
 `;
 
 export const ReservationPhoneBox = styled.div`
